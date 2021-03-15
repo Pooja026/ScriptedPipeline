@@ -1,39 +1,33 @@
-Pipeline
+pipeline 
 {
 agent any
-Stages
-{
-Stage('Build')
-{
-Steps
-{
-echo "Building a project"
-bat "mvn clean"
-}
-}
-
-Stage('Test')
-{
-Steps
-{
-echo "Testing a project"
-bat "mvn test"
-}
-}
-Stage('Compile')
-{
-Steps
-{
-echo "compiling a project"
-bat "mvn compile"
-}
-}
-Stage('Deploy')
-{
-Steps
-{
-echo "Deploying a project"
-}
-}
+  stages
+  {
+  stage('one')
+  {
+  steps
+  {
+  echo 'Hi, This is my first declarative pipeline'
+  }
+  }
+  stage('Two')
+  {
+  steps
+  {
+  input('do you want to proceed?') 
+  }
+  }
+  stage('Three')
+  {
+  when{
+  not{
+  branch "main"
+  }
+  }
+  steps
+  {
+  echo "hello"
+  }
+  }
 }
 }
