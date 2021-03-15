@@ -3,27 +3,30 @@ pipeline {
 
     stages {
        
-        stage('git repo & clean') {
+        stage('compile stage') {
             steps {
-                bat "rmdir  /s /q  ScriptedPipeline"
-                bat "git clone https://github.com/Pooja026/ScriptedPipeline.git"
-                //bat "mvn clean -f ScriptedPipeline"
+                witMaven(maven :'maven-3.6.3')
+				{
+				bat 'mvn clean compile'
+				}
             }
         }
-        stage('install') {
+        stage('Testing stage') {
             steps {
-                bat "mvn install -f ScriptedPipeline"
+                witMaven(maven :'maven-3.6.3')
+				{
+				bat 'mvn test'
+				}
             }
         }
-        stage('Test') {
+       stage('Deployment stage') {
             steps {
-                bat "mvn test -f ScriptedPipeline"
+                witMaven(maven :'maven-3.6.3')
+				{
+				bat 'mvn deploy'
+				}
             }
         }
-        stage('package') {
-            steps {
-                bat "mvn package -f ScriptedPipeline"
-            }
-        }
+        
     }
 }
