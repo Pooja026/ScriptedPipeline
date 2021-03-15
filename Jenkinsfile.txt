@@ -29,12 +29,6 @@ agent any
   echo "hello"
   }
   }
-   stage('four')
-  {
-  steps
-  {
-  echo 'Hi, This is my first declarative pipeline'
-  }
-  }
+  
 }
 }
