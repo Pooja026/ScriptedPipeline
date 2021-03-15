@@ -1,32 +1,37 @@
-pipeline {
-    agent any
+Pipeline
+{
+agent any
+Stages
+{
+Stage('Build')
+{
+Steps
+{
+echo "Building a project"
+bat "mvn clean"
+}
+}
 
-    stages {
-       
-        stage('compile stage') {
-            steps {
-                witMaven(maven :'maven-3.6.3')
-				{
-				bat 'mvn clean compile'
-				}
-            }
-        }
-        stage('Testing stage') {
-            steps {
-                witMaven(maven :'maven-3.6.3')
-				{
-				bat 'mvn test'
-				}
-            }
-        }
-       stage('Deployment stage') {
-            steps {
-                witMaven(maven :'maven-3.6.3')
-				{
-				bat 'mvn deploy'
-				}
-            }
-        }
-        
-    }
+Stage('Test')
+{
+Steps
+{
+echo "Testing a project"
+bat "mvn test"
+}
+}
+Stage('Compile')
+{
+Steps
+{
+echo "compiling a project"
+bat "mvn compile"
+}s
+}
+Stage('Deploy')
+{
+Steps
+{
+echo "Deploying a project"
+}
 }
