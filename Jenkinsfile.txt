@@ -26,12 +26,14 @@ Steps
 {
 echo "compiling a project"
 bat "mvn compile"
-}s
+}
 }
 Stage('Deploy')
 {
 Steps
 {
 echo "Deploying a project"
+}
+}
 }
 }
